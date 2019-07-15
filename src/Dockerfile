@@ -1,4 +1,4 @@
-FROM nginx:1.13.9
+FROM nginx:latest
 
 # Setup directories
 RUN mkdir -p /app/dehydrated
@@ -21,8 +21,7 @@ RUN apt-get install -y ca-certificates cron curl git python-setuptools
 # specific commit. Update checkout command as needed.
 # ---------------------------------------------------------
 WORKDIR /app/dehydrated
-RUN git clone -n https://github.com/lukas2511/dehydrated.git ./
-RUN git checkout c0bcf91
+RUN git clone https://github.com/lukas2511/dehydrated.git ./
 
 # ---------------------------------------------------------
 # Install python libraries:
@@ -42,6 +41,7 @@ RUN touch /var/log/cron
 
 # Copy startup script
 COPY ./startup.sh /app/startup.sh
+RUN chmod a+x /app/startup.sh
 
 # Startup command
 CMD [ "/app/startup.sh" ]
