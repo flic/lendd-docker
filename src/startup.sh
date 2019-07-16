@@ -6,6 +6,9 @@ env > /etc/environment
 # Make sure we already registered with Let's Encrypt via dehydrated client
 /app/dehydrated/dehydrated --register --accept-terms
 
+# Initial certificate check at bootup
+/app/dehydrated/dehydrated --cron
+
 # Start cron
 cron
 
